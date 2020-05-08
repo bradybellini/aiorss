@@ -26,7 +26,6 @@ class RSSParser:
     @staticmethod
     def _get_entry_info(feed, e):
         tags = getattr(e, 'tags', 'none')
-        # tags = [i for i in tags_raw
         author = getattr(e, 'author', 'not listed')
         if 'published_parsed' in e:
             date = e['published_parsed']
