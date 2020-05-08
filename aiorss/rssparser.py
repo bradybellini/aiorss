@@ -1,6 +1,5 @@
 import feedparser
 import time
-import datetime
 
 class RSSParser:
     
