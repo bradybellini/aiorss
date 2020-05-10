@@ -1,13 +1,19 @@
 class ConstructRSSHeader:
 
-    _etag: str = ''
-    _max_age: int = None
-    user_agent: str = 'Change Later'
-    from_header: str = ''
-    header_contruct: dict = {}
+    # _etag: str = ''
+    # _max_age: int = None
+    # user_agent: str = 'Change Later'
+    # from_header: str = ''
+    # header_contruct: dict = {}
 
     def __init__(self, h):
         self.h = h
+        self._etag: str = ''
+        self._max_age: int = None
+        self.user_agent: str = 'Change Later'
+        self.from_header: str = ''
+        self.header_contruct: dict = {}
+
 
     async def _check_etag(self):
         if 'etag' in self.h:
@@ -25,12 +31,12 @@ class ConstructRSSHeader:
                     (l if l in '0123456789' else ' ') for l in _cache_control)
                 _max_age_lowest = min(int(m)
                                       for m in _cache_control_ints.split())
-                if _max_age_lowest > 3600:
+                if _max_age_lowest > 3600 or _max_age_lowest < 300:
                     self._max_age = 600
                 else:
                     self._max_age = _max_age_lowest
         else:
-            self._max_age = 600
+            self._max_age = 30
 
     async def get_etag(self):
         await self._check_etag()
