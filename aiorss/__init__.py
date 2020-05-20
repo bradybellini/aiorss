@@ -3,7 +3,13 @@
 __author__ = "Brady"
 __name__ = "aiorss"
 
-
-from .constructrssheader import ConstructRSSHeader
+import asyncio
 from .getrssfeed import GetRSSFeed
 from .rssparser import RSSParser
+
+class BuildRSS():
+
+    async def  __init__(self):
+        pass
+
+    
