@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 class ConstructRSSHeader:
 
     # _etag: str = ''
@@ -12,9 +14,9 @@ class ConstructRSSHeader:
         self._max_age: int = None
         self.user_agent: str = 'Change Later'
         self.from_header: str = ''
-        self.header_contruct: dict = {}
+        self.header_construct: dict = {}
 
-
+    @abstractmethod
     async def _check_etag(self):
         if 'etag' in self.h:
             self._etag = self.h['etag']
@@ -23,6 +25,7 @@ class ConstructRSSHeader:
             self._etag = None
             return False
 
+    @abstractmethod
     async def _check_max_age(self):
         if 'cache-control' in self.h:
             _cache_control = self.h['cache-control']
@@ -48,7 +51,7 @@ class ConstructRSSHeader:
 
     async def headers(self):
         if await self._check_etag():
-            self.header_contruct = {'If-None-Match': self._etag}
+            self.header_construct = {'If-None-Match': self._etag}
         # add other header when there is no etag detected
-        return self.header_contruct
+        return self.header_construct
 
