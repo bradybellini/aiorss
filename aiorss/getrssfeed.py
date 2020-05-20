@@ -28,7 +28,7 @@ class GetRSSFeed:
                 await self._parse(r.content)
                 header_obj = ConstructRSSHeader(r.headers)
                 headers = await header_obj.headers()
-                print(r.headers)
+                # print(r.headers)0
             elif r.status_code != 304:
                 print(f'error in loop {self.feed_url}')
                 break
@@ -37,5 +37,5 @@ class GetRSSFeed:
 
     async def _parse(self, feed_str):
         parse = RSSParser(feed_str.decode('utf-8'))
-        print(type(parse.entries))
-        # return feed_str
+        # print(type(parse.entries))
+        return parse.entries[0]
