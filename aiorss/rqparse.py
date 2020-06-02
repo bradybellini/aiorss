@@ -1,6 +1,7 @@
 from redis import Redis
 import rq
 import aiorss.rssparser
+from secret import redis_pass
 
 class RedisParse:
 
