@@ -16,7 +16,7 @@ class RSSParser:
         return not any(x in entry.link for x in self.link_filter)
 
     def _check_title(self, entry):
-        return not any(b in entry.title for b in self.title_filter)
+        return not any(x in entry.title for x in self.title_filter)
 
     def _filter_entries(self, entries):
         for i in entries:
