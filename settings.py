@@ -1,9 +1,9 @@
-from secret import redis_pass
+import secret
 # REDIS_URL = 'redis://localhost:6379/0'
 
 # You can also specify the Redis DB to use
-REDIS_HOST = '206.189.218.5'
-REDIS_PORT = 6379
+REDIS_HOST = 'secret.redis_host'
+REDIS_PORT = secret.redis_port
 REDIS_DB = 0
 REDIS_PASSWORD = redis_pass
 
