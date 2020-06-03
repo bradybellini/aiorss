@@ -1,6 +1,6 @@
 from redis import Redis
 import rq
-import aiorss.rssparser
+from aiorss.rssparser import RSSParser
 from secret import redis_host, redis_pass, redis_port
 
 class RedisParse:
@@ -9,8 +9,8 @@ class RedisParse:
         self.content_string = content_string
         
     def _parse(self, feed_string):
-        f = rssparser(feed_string)
-        print(f)
+        f = RSSParser(feed_string)
+        
 
     def send_worker(self):
         redis_connection = Redis(host=redis_host, port=redis_port, password=redis_pass)
