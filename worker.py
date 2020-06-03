@@ -12,5 +12,5 @@ import httpx
 
 if __name__ == '__main__':
     with Connection(redis_connection):
-        worker = Worker(Queue)
+        worker = Worker(map(Queue, listen))
         worker.work()
