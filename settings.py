@@ -1,11 +1,11 @@
-import secret
+from secret import redis_host, redis_pass, redis_port
 # REDIS_URL = 'redis://localhost:6379/0'
 
 # You can also specify the Redis DB to use
-REDIS_HOST = 'secret.redis_host'
-REDIS_PORT = 'secret.redis_port'
+REDIS_HOST = redis_host
+REDIS_PORT = redis_port
 REDIS_DB = 0
-REDIS_PASSWORD = 'redis_pass'
+REDIS_PASSWORD = redis_pass
 
 # Queues to listen on
 QUEUES = ['high', 'default', 'low']
