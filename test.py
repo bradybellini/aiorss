@@ -6,8 +6,16 @@ async def loop_1():
     newfeed1 = GetRSSFeed('https://www.cryptopolitan.com/rss', 'test', 'test')
     await newfeed1.start_loop()
 
+async def loop_2():
+    newfeed1 = GetRSSFeed('https://www.reddit.com/r/ethereum/top.rss', 'test', 'test')
+    await newfeed1.start_loop()
+
+async def loop_3():
+    newfeed1 = GetRSSFeed('https://www.coindesk.com/rss', 'test', 'test')
+    await newfeed1.start_loop()
+
 if __name__ == '__main__':
-    current_loops = asyncio.gather(loop_1())
+    current_loops = asyncio.gather(loop_1(), loop_2(), loop_3())
     loop = asyncio.get_event_loop()
     loop.run_until_complete(current_loops)
 
