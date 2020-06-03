@@ -1,5 +1,5 @@
 from secret import redis_host, redis_pass, redis_port
-REDIS_URL = 'redis://10.138.236.140:6379/0'
+# REDIS_URL = 'redis://10.138.236.140:6379/0'
 
 # You can also specify the Redis DB to use
 REDIS_HOST = redis_host
