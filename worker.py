@@ -1,5 +1,5 @@
 import os
-import redis
+from redis import Redis
 from secret import redis_pass, redis_host, redis_port
 from rq import Worker, Queue, Connection
 
