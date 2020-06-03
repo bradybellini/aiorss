@@ -2,6 +2,7 @@ import httpx
 import asyncio
 from aiorss.rssparser import RSSParser
 from aiorss.constructrssheader import ConstructRSSHeader
+from aiorss.rqparse import RedisParse
 
 # TODO: Think of different ways of structing or aproaching the loop to fetch the rss feed.
 # Find ways to not make so many things dependent on eachother
@@ -36,6 +37,6 @@ class GetRSSFeed:
             await asyncio.sleep(await header_obj.get_max_age())
 
     async def _parse(self, feed_str):
-        parse = RSSParser(feed_str.decode('utf-8'))
+        parse = RedisParse(feed_str.decode('utf-8'))
         # print(type(parse.entries))
-        return parse.entries[0]
+        print(parse.send_worker())
