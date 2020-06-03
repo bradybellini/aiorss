@@ -14,6 +14,6 @@ class RedisParse:
 
     def send_worker(self):
         redis_connection = Redis(host=redis_host, port=redis_port, password=redis_pass)
-        q = rq.Queue(connection=redis_connection)
+        q = rq.Queue('default', connection=redis_connection)
         job = q.enqueue(self._parse, self.content_string)
         # return job.result
