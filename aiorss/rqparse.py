@@ -1,7 +1,7 @@
 from redis import Redis
 import rq
 import aiorss.rssparser
-import secret
+from secret import redis_host, redis_pass, redis_port
 
 class RedisParse:
 
@@ -13,7 +13,7 @@ class RedisParse:
         print(f)
 
     def send_worker(self):
-        redis_connection = Redis(host=secret.redis_host, port=secret.redis_port, password=secret.redis_pass)
+        redis_connection = Redis(host=redis_host, port=redis_port, password=redis_pass)
         q = rq.Queue(connection=redis_connection)
         job = q.enqueue(self._parse, self.content_string)
         return job.result

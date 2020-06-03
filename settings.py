@@ -3,9 +3,9 @@ import secret
 
 # You can also specify the Redis DB to use
 REDIS_HOST = 'secret.redis_host'
-REDIS_PORT = secret.redis_port
+REDIS_PORT = 'secret.redis_port'
 REDIS_DB = 0
-REDIS_PASSWORD = redis_pass
+REDIS_PASSWORD = 'redis_pass'
 
 # Queues to listen on
 QUEUES = ['high', 'default', 'low']
