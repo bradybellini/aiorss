@@ -26,7 +26,10 @@ class GetRSSFeed:
                 except httpx.ConnectTimeout as e:
                     print(e)
             if r.status_code == 200:
-                await self._parse(r.content)
+                try:
+                    await self._parse(r.content)
+                except:
+                    print(broke, self.feed_url)
                 header_obj = ConstructRSSHeader(r.headers)
                 headers = await header_obj.headers()
                 # print(r.headers)0
