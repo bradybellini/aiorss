@@ -39,4 +39,4 @@ class GetRSSFeed:
     async def _parse(self, feed_str):
         parse = RedisParse(feed_str.decode('utf-8'))
         # print(type(parse.entries))
-        print(parse.send_worker())
+        return parse
