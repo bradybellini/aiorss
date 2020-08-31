@@ -5,7 +5,7 @@ from aiorss.constructrssheader import ConstructRSSHeader
 from aiorss.rqparse import RedisParse
 
 # TODO: Think of different ways of structing or aproaching the loop to fetch the rss feed.
-# Find ways to not make so many things dependent on eachother
+
 
 class GetRSSFeed:
 
@@ -28,11 +28,11 @@ class GetRSSFeed:
             if r.status_code == 200:
                 try:
                     await self._parse(r.content)
-                except:
-                    print(broke, self.feed_url)
+                except Exception as e:
+                    print(e, self.feed_url)
                 header_obj = ConstructRSSHeader(r.headers)
                 headers = await header_obj.headers()
-                # print(r.headers)0
+                # print(await header_obj.get_max_age())
             elif r.status_code != 304:
                 print(f'error in loop {self.feed_url}')
                 break
@@ -40,6 +40,9 @@ class GetRSSFeed:
             await asyncio.sleep(await header_obj.get_max_age())
 
     async def _parse(self, feed_str):
-        parse = RedisParse(feed_str.decode('utf-8'))
+        parse = RSSParser(feed_str.decode('utf-8'))
+        print(parse.entries)
+        return parse.entries[0]
+        # parse = RedisParse(feed_str.decode('utf-8'))
         # print(type(parse.entries))
-        return parse.send_worker()
+        # return parse.send_worker()
