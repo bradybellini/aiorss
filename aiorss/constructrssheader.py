@@ -38,6 +38,8 @@ class ConstructRSSHeader:
                     self._max_age = 600
                 else:
                     self._max_age = _max_age_lowest
+            else:
+                self._max_age= 30
         else:
             self._max_age = 30
 
