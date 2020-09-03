@@ -15,5 +15,5 @@ class Hook:
         await self._send(payload, 'WARNING')
     
     async def emergency(self, content:str):
-        payload = f':name_badge: **EMERGENCY** <@101563945462026240> :name_badge:\n\n{content}'
+        payload = f':name_badge: **EMERGENCY** :name_badge:\n<@101563945462026240>\n{content}'
         await self._send(payload, 'EMERGENCY')
