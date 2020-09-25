@@ -7,7 +7,7 @@ class RSSParser:
     title_filter = []
     name = ''
     url = ''
-    category = ''
+    categoriesP = []
 
     def __init__(self, feed):
         self.feed = feed
@@ -25,7 +25,7 @@ class RSSParser:
 
     @staticmethod
     def _get_entry_info(feed, e):
-        tags = getattr(e, 'tags', 'none')
+        tags = getattr(e, 'tags', 'null')
         author = getattr(e, 'author', 'not listed')
         if 'published_parsed' in e:
             date = e['published_parsed']

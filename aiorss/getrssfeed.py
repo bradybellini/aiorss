@@ -9,40 +9,44 @@ from aiorss.rqparse import RedisParse
 
 class GetRSSFeed:
 
-    def __init__(self, feed_url, source_name, clean_url):
+    def __init__(self, feed_url:str, source_name:str, clean_url:str, categories:list):
         self.feed_url = feed_url
         self.source_name = source_name
         self.clean_url = clean_url
-
+        self.categories = categories
 
     async def start_loop(self):
-        is_loop = True
         headers = {}
         max_age = 10
-        while is_loop:
+        while True:
             async with httpx.AsyncClient() as client:
                 try:
                     r = await client.get(url=self.feed_url, headers=headers)
                 except httpx.ConnectTimeout as e:
-                    print(e)
+                    print(e) #@TODO add webhook for error
             if r.status_code == 200:
                 try:
                     await self._parse(r.content)
                 except Exception as e:
-                    print(e, self.feed_url)
+                    print(e, self.feed_url) #@TODO add webhook for error
                 header_obj = ConstructRSSHeader(r.headers)
                 headers = await header_obj.headers()
-                # print(await header_obj.get_max_age())
             elif r.status_code != 304:
-                print(f'error in loop {self.feed_url}')
+                print(f'error in loop {self.feed_url}') #@TODO add webhook for error
                 break
 
             await asyncio.sleep(await header_obj.get_max_age())
 
     async def _parse(self, feed_str):
         parse = RSSParser(feed_str.decode('utf-8'))
-        print(parse.entries)
-        return parse.entries[0]
+        parse.url = self.clean_url
+        parse.feed = self.feed_url
+        parse.name = self.source_name
+        parse.categories = self.categories
+        print(parse.feed)
+        return parse
+
         # parse = RedisParse(feed_str.decode('utf-8'))
         # print(type(parse.entries))
         # return parse.send_worker()
+
