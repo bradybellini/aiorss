@@ -2,6 +2,7 @@ do $$
 declare
 	article_id articles.id%type;
 	author_id authors.id%type;
+	tag_id tags.id%type;
 begin
 
 	insert into articles (id, title, link, summary, published)
@@ -20,4 +21,7 @@ begin
 end; $$
 
 -- need to add authormap sequence and reset author sequence
--- need to add publications, add author id to article, add tags and tagmap, publications, and think about publications category structure, like making a m to m
+-- need to add publications, add author id to article, add tags and tagmap, publications, 
+-- and think about publications category structure, like making a m to m
+-- need to add checks into all inserts to make sure the item does not exist when trying to insert
+-- Use upsert to check if they do or not
