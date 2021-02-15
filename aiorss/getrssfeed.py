@@ -4,7 +4,7 @@ from aiorss.rssparser import RSSParser
 from aiorss.constructrssheader import ConstructRSSHeader
 from aiorss.rqparse import RedisParse
 
-# TODO: Think of different ways of structing or aproaching the loop to fetch the rss feed.
+# TODO: Think of different ways of structuring or aproaching the loop to fetch the rss feed.
 
 
 class GetRSSFeed:
