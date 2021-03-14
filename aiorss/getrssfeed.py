@@ -23,16 +23,16 @@ class GetRSSFeed:
                 try:
                     r = await client.get(url=self.feed_url, headers=headers)
                 except httpx.ConnectTimeout as e:
-                    print(e) #@TODO add webhook for error
+                    print(e) # TODO add webhook for error
             if r.status_code == 200:
                 try:
                     await self._parse(r.content)
                 except Exception as e:
-                    print(e, self.feed_url) #@TODO add webhook for error
+                    print(e, self.feed_url) # TODO add webhook for error
                 header_obj = ConstructRSSHeader(r.headers)
                 headers = await header_obj.headers()
             elif r.status_code != 304:
-                print(f'error in loop {self.feed_url}') #@TODO add webhook for error
+                print(f'error in loop {self.feed_url}') # TODO add webhook for error
                 break
 
             await asyncio.sleep(await header_obj.get_max_age())
